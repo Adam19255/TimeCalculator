@@ -1,177 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Time Calculator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
     <div class="container pt-5">
-        <div class="row">
-            <!-- Left Column for Enter Times Card -->
-            <div class="col-md-6">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Enter Times:</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="col" id="timeInputsContainer">
-                            <!-- Initial 10 sets of inputs -->
-                            <script>
-                                let totalSets = 10; // Initial number of sets
+      <div class="row">
+        <!-- Left Column for Enter Times Card -->
+        <div class="col-md-6">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">Enter Times:</h4>
+            </div>
+            <div class="card-body">
+              <div class="col" id="timeInputsContainer">
+                <!-- Initial 10 sets of inputs -->
+                <script>
+                  let totalSets = 10; // Initial number of sets
 
-                                for (let i = 1; i <= 10; i++) {
-                                    document.write(`
+                  for (let i = 1; i <= 10; i++) {
+                    document.write(`
                                         <div class="d-flex align-items-center mb-3">
                                             <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'seconds${i}')">
-                                            <span class="mx-2">:</span>
-                                            <input type="text" id="seconds${i}" class="form-control form-control-lg rounded-3" placeholder="SS" aria-label="Seconds" maxlength="2" oninput="moveToNextInput('seconds${i}', 'hours${i + 1}')">
+                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'hours${
+                      i + 1
+                    }')">
                                         </div>
                                     `);
-                                }
+                  }
 
-                                function moveToNextInput(currentInputId, nextInputId) {
-                                    const currentInput = document.getElementById(currentInputId);
-                                    const nextInput = document.getElementById(nextInputId);
+                  function moveToNextInput(currentInputId, nextInputId) {
+                    const currentInput =
+                      document.getElementById(currentInputId);
+                    const nextInput = document.getElementById(nextInputId);
 
-                                    if (currentInput.value.length === currentInput.maxLength) {
-                                        nextInput.focus();
-                                    }
-                                }
+                    if (currentInput.value.length === currentInput.maxLength) {
+                      nextInput.focus();
+                    }
+                  }
 
-                                function addMoreSets() {
-                                    const container = document.getElementById('timeInputsContainer');
+                  function addMoreSets() {
+                    const container = document.getElementById(
+                      "timeInputsContainer"
+                    );
 
-                                    // Add 10 more sets of inputs
-                                    for (let i = totalSets + 1; i <= totalSets + 10; i++) {
-                                        const div = document.createElement('div');
-                                        div.classList.add('d-flex', 'align-items-center', 'mb-3');
-                                        div.innerHTML = `
+                    // Add 10 more sets of inputs
+                    for (let i = totalSets + 1; i <= totalSets + 10; i++) {
+                      const div = document.createElement("div");
+                      div.classList.add("d-flex", "align-items-center", "mb-3");
+                      div.innerHTML = `
                                             <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'seconds${i}')">
-                                            <span class="mx-2">:</span>
-                                            <input type="text" id="seconds${i}" class="form-control form-control-lg rounded-3" placeholder="SS" aria-label="Seconds" maxlength="2" oninput="moveToNextInput('seconds${i}', 'hours${i + 1}')">
+                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'hours${
+                        i + 1
+                      }')">
                                         `;
-                                        container.appendChild(div);
-                                    }
+                      container.appendChild(div);
+                    }
 
-                                    totalSets += 10; // Update the total number of sets
-                                }
+                    totalSets += 10; // Update the total number of sets
+                  }
 
-                                // Function to calculate the total time
-                                function calculateTotalTime() {
-                                    let totalHours = 0;
-                                    let totalMinutes = 0;
-                                    let totalSeconds = 0;
+                  // Function to calculate the total time
+                  function calculateTotalTime() {
+                    let totalHours = 0;
+                    let totalMinutes = 0;
 
-                                    // Loop through all sets of inputs
-                                    for (let i = 1; i <= totalSets; i++) {
-                                        const hoursInput = document.getElementById(`hours${i}`);
-                                        const minutesInput = document.getElementById(`minutes${i}`);
-                                        const secondsInput = document.getElementById(`seconds${i}`);
+                    // Loop through all sets of inputs
+                    for (let i = 1; i <= totalSets; i++) {
+                      const hoursInput = document.getElementById(`hours${i}`);
+                      const minutesInput = document.getElementById(
+                        `minutes${i}`
+                      );
 
-                                        // Parse input values to integers, defaulting to 0 if empty
-                                        const hours = parseInt(hoursInput.value) || 0;
-                                        const minutes = parseInt(minutesInput.value) || 0;
-                                        const seconds = parseInt(secondsInput.value) || 0;
+                      // Parse input values to integers, defaulting to 0 if empty
+                      const hours = parseInt(hoursInput.value) || 0;
+                      const minutes = parseInt(minutesInput.value) || 0;
 
-                                        // Calculate total time
-                                        totalHours += hours;
-                                        totalMinutes += minutes;
-                                        totalSeconds += seconds;
+                      // Calculate total time
+                      totalHours += hours;
+                      totalMinutes += minutes;
 
-                                        // Adjust minutes and seconds if they exceed 60
-                                        totalMinutes += Math.floor(totalSeconds / 60);
-                                        totalSeconds = totalSeconds % 60;
+                      // Adjust minutes if they exceed 60
+                      totalHours += Math.floor(totalMinutes / 60);
+                      totalMinutes = totalMinutes % 60;
+                    }
 
-                                        // Adjust hours and minutes if they exceed 60
-                                        totalHours += Math.floor(totalMinutes / 60);
-                                        totalMinutes = totalMinutes % 60;
-                                    }
+                    // Display the result
+                    const totalTimeDisplay =
+                      document.getElementById("totalTimeDisplay");
+                    totalTimeDisplay.textContent = `Total Time: ${totalHours} hours ${totalMinutes} minutes`;
 
-                                    // Display the result
-                                    const totalTimeDisplay = document.getElementById('totalTimeDisplay');
-                                    totalTimeDisplay.textContent = `Total Time: ${totalHours} hours ${totalMinutes} minutes ${totalSeconds} seconds`;
+                    // Calculate decimal values
+                    const totalHoursDecimal = totalHours + totalMinutes / 60;
 
-                                    // Calculate decimal values
-                                    const totalHoursDecimal = totalHours + totalMinutes / 60 + totalSeconds / 3600;
-                                    const totalMinutesDecimal = totalHours * 60 + totalMinutes + totalSeconds / 60;
-                                    const totalSecondsDecimal = totalHours * 3600 + totalMinutes * 60 + totalSeconds;
-
-                                    // Display decimal values in the dedicated card
-                                    const decimalCard = document.getElementById('decimalCard');
-                                    decimalCard.innerHTML = `
+                    // Display decimal values in the dedicated card
+                    const decimalCard = document.getElementById("decimalCard");
+                    decimalCard.innerHTML = `
                                         <div class="card mb-4 rounded-3 shadow-sm">
                                             <div class="card-header py-3">
                                                 <h4 class="my-0 fw-normal">Decimal Values:</h4>
                                             </div>
                                             <div class="card-body">
                                                 <p class="lead fs-3">
-                                                    Total Time (Decimal):
-                                                    <br>
-                                                    Hours: ${totalHoursDecimal.toFixed(4)}<br>
-                                                    Minutes: ${totalMinutesDecimal.toFixed(4)}<br>
-                                                    Seconds: ${totalSecondsDecimal.toFixed(4)}
+                                                    Total Time: ${totalHoursDecimal.toFixed(
+                                                      4
+                                                    )}
                                                 </p>
                                             </div>
                                         </div>
                                     `;
-                                }
+                  }
 
-                                // Function to clear all inputs and reset the page
-                                function clearPage() {
-                                    location.reload();
-                                }
-                            </script>
-                        </div>
+                  // Function to clear all inputs and reset the page
+                  function clearPage() {
+                    location.reload();
+                  }
+                </script>
+              </div>
 
-                        <!-- Button to add 10 more sets -->
-                        <button type="button" class="w-100 btn btn-secondary btn-lg mt-3" onclick="addMoreSets()">Add 10 More Sets</button>
+              <!-- Button to add 10 more sets -->
+              <button
+                type="button"
+                class="w-100 btn btn-secondary btn-lg mt-3"
+                onclick="addMoreSets()"
+              >
+                Add 10 More Sets
+              </button>
 
-                        <!-- Button to clear the page -->
-                        <button type="button" class="w-100 btn btn-danger btn-lg mt-3" onclick="clearPage()">Clear</button>
-                    </div>
-                </div>
+              <!-- Button to clear the page -->
+              <button
+                type="button"
+                class="w-100 btn btn-danger btn-lg mt-3"
+                onclick="clearPage()"
+              >
+                Clear
+              </button>
             </div>
-
-            <!-- Right Column for Total Time and Decimal Values Cards -->
-            <div class="col-md-6">
-                <!-- Card for displaying the total time -->
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Total Time:</h4>
-                    </div>
-                    <div class="card-body">
-                        <p id="totalTimeDisplay" class="lead fs-3">Total Time: 00 hours 00 minutes 00 seconds</p>
-                        
-                        <!-- Button to manually calculate and display total time -->
-                        <button type="button" class="btn btn-primary" onclick="calculateTotalTime()">Calculate Total Time</button>
-                    </div>
-                </div>
-
-                <!-- Card for displaying decimal values -->
-                <div id="decimalCard">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Decimal Values:</h4>
-                        </div>
-                        <div class="card-body">
-                            <p class="lead fs-3">
-                                Total Time (Decimal):
-                                <br>
-                                Hours: 0.0000<br>
-                                Minutes: 0.0000<br>
-                                Seconds: 0.0000
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <!-- Right Column for Total Time and Decimal Values Cards -->
+        <div class="col-md-6">
+          <!-- Card for displaying the total time -->
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">Total Time:</h4>
+            </div>
+            <div class="card-body">
+              <p id="totalTimeDisplay" class="lead fs-3">
+                Total Time: 00 hours 00 minutes
+              </p>
+
+              <!-- Button to manually calculate and display total time -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="calculateTotalTime()"
+              >
+                Calculate Total Time
+              </button>
+            </div>
+          </div>
+
+          <!-- Card for displaying decimal values -->
+          <div id="decimalCard">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Decimal Values:</h4>
+              </div>
+              <div class="card-body">
+                <p class="lead fs-3">Total Time: 0.0000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
