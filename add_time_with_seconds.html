@@ -44,11 +44,11 @@
                   for (let i = 1; i <= 10; i++) {
                     document.write(`
                                         <div class="d-flex align-items-center mb-3">
-                                            <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
+                                            <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" inputmode="numeric" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'seconds${i}')">
+                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" inputmode="numeric" oninput="moveToNextInput('minutes${i}', 'seconds${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="seconds${i}" class="form-control form-control-lg rounded-3" placeholder="SS" aria-label="seconds" maxlength="2" oninput="moveToNextInput('seconds${i}', 'hours${
+                                            <input type="text" id="seconds${i}" class="form-control form-control-lg rounded-3" placeholder="SS" aria-label="seconds" maxlength="2" inputmode="numeric" oninput="moveToNextInput('seconds${i}', 'hours${
                       i + 1
                     }')">
                                         </div>
@@ -75,11 +75,11 @@
                       const div = document.createElement("div");
                       div.classList.add("d-flex", "align-items-center", "mb-3");
                       div.innerHTML = `
-                                            <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
+                                            <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" inputmode="numeric" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'seconds${i}')">
+                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" inputmode="numeric" oninput="moveToNextInput('minutes${i}', 'seconds${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="seconds${i}" class="form-control form-control-lg rounded-3" placeholder="SS" aria-label="seconds" maxlength="2" oninput="moveToNextInput('seconds${i}', 'hours${
+                                            <input type="text" id="seconds${i}" class="form-control form-control-lg rounded-3" placeholder="SS" aria-label="seconds" maxlength="2" inputmode="numeric" oninput="moveToNextInput('seconds${i}', 'hours${
                         i + 1
                       }')">
                                         `;
