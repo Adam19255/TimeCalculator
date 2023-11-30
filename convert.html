@@ -44,7 +44,7 @@
                   for (let i = 1; i <= totalDecimalSets; i++) {
                     document.write(`
                                         <div class="d-flex align-items-center mb-3">
-                                            <input type="text" id="decimalInput${i}" class="form-control form-control-lg rounded-3" maxlength="4" placeholder="0.00" aria-label="Decimal Time" oninput="moveToNextInput('decimalInput${i}', 'decimalInput${
+                                            <input type="text" id="decimalInput${i}" class="form-control form-control-lg rounded-3" maxlength="4" placeholder="0.00" aria-label="Decimal Time" inputmode="numeric" oninput="moveToNextInput('decimalInput${i}', 'decimalInput${
                       i + 1
                     }')">
                                         </div>
@@ -75,7 +75,7 @@
                       const div = document.createElement("div");
                       div.classList.add("d-flex", "align-items-center", "mb-3");
                       div.innerHTML = `
-                                            <input type="text" id="decimalInput${i}" class="form-control form-control-lg rounded-3" maxlength="4" placeholder="0.00" aria-label="Decimal Time" oninput="moveToNextInput('decimalInput${i}', 'decimalInput${
+                                            <input type="text" id="decimalInput${i}" class="form-control form-control-lg rounded-3" maxlength="4" placeholder="0.00" aria-label="Decimal Time" inputmode="numeric" oninput="moveToNextInput('decimalInput${i}', 'decimalInput${
                         i + 1
                       }')">
                                         `;
