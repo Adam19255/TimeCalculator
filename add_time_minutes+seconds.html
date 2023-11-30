@@ -44,9 +44,9 @@
                   for (let i = 1; i <= 10; i++) {
                     document.write(`
                                         <div class="d-flex align-items-center mb-3">
-                                            <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
+                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'seconds${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'hours${
+                                            <input type="text" id="seconds${i}" class="form-control form-control-lg rounded-3" placeholder="SS" aria-label="seconds" maxlength="2" oninput="moveToNextInput('seconds${i}', 'minutes${
                       i + 1
                     }')">
                                         </div>
@@ -73,9 +73,9 @@
                       const div = document.createElement("div");
                       div.classList.add("d-flex", "align-items-center", "mb-3");
                       div.innerHTML = `
-                                            <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
+                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'seconds${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'hours${
+                                            <input type="text" id="seconds${i}" class="form-control form-control-lg rounded-3" placeholder="SS" aria-label="seconds" maxlength="2" oninput="moveToNextInput('seconds${i}', 'minutes${
                         i + 1
                       }')">
                                         `;
@@ -89,23 +89,29 @@
                   function calculateTotalTime() {
                     let totalHours = 0;
                     let totalMinutes = 0;
+                    let totalSeconds = 0;
 
                     // Loop through all sets of inputs
                     for (let i = 1; i <= totalSets; i++) {
-                      const hoursInput = document.getElementById(`hours${i}`);
                       const minutesInput = document.getElementById(
                         `minutes${i}`
                       );
-
+                      const secondsInput = document.getElementById(
+                        `seconds${i}`
+                      );
                       // Parse input values to integers, defaulting to 0 if empty
-                      const hours = parseInt(hoursInput.value) || 0;
                       const minutes = parseInt(minutesInput.value) || 0;
+                      const seconds = parseInt(secondsInput.value) || 0;
 
                       // Calculate total time
-                      totalHours += hours;
                       totalMinutes += minutes;
+                      totalSeconds += seconds;
 
-                      // Adjust minutes if they exceed 60
+                      // Adjust minutes and seconds if they exceed 60
+                      totalMinutes += Math.floor(totalSeconds / 60);
+                      totalSeconds = totalSeconds % 60;
+
+                      // Adjust hours and minutes if they exceed 60
                       totalHours += Math.floor(totalMinutes / 60);
                       totalMinutes = totalMinutes % 60;
                     }
@@ -113,10 +119,11 @@
                     // Display the result
                     const totalTimeDisplay =
                       document.getElementById("totalTimeDisplay");
-                    totalTimeDisplay.textContent = `Total Time: ${totalHours} hours ${totalMinutes} minutes`;
+                    totalTimeDisplay.textContent = `Total Time: ${totalHours} hours ${totalMinutes} minutes ${totalSeconds} seconds`;
 
                     // Calculate decimal values
-                    const totalHoursDecimal = totalHours + totalMinutes / 60;
+                    const totalHoursDecimal =
+                      totalHours + totalMinutes / 60 + totalSeconds / 3600;
 
                     // Display decimal values in the dedicated card
                     const decimalCard = document.getElementById("decimalCard");
@@ -173,7 +180,7 @@
             </div>
             <div class="card-body">
               <p id="totalTimeDisplay" class="lead fs-3">
-                Total Time: 00 hours 00 minutes
+                Total Time: 00 hours 00 minutes 00 seconds
               </p>
 
               <!-- Button to manually calculate and display total time -->
