@@ -73,9 +73,9 @@
                       const div = document.createElement("div");
                       div.classList.add("d-flex", "align-items-center", "mb-3");
                       div.innerHTML = `
-                                            <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
+                                            <input type="text" id="hours${i}" class="form-control form-control-lg rounded-3" placeholder="HH" aria-label="Hours" maxlength="2" inputmode="numeric" oninput="moveToNextInput('hours${i}', 'minutes${i}')">
                                             <span class="mx-2">:</span>
-                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" oninput="moveToNextInput('minutes${i}', 'hours${
+                                            <input type="text" id="minutes${i}" class="form-control form-control-lg rounded-3" placeholder="MM" aria-label="Minutes" maxlength="2" inputmode="numeric" oninput="moveToNextInput('minutes${i}', 'hours${
                         i + 1
                       }')">
                                         `;
